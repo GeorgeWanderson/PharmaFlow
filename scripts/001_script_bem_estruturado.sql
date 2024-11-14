@@ -1,24 +1,21 @@
--- Criando a tabela de categorias de medicamentos
 CREATE TABLE categorias (
-    categoria_id INT PRIMARY KEY, -- Chave primária
-    nome VARCHAR(255) NOT NULL, -- Nome da categoria
-    descricao TEXT, -- Descrição da categoria
-    CONSTRAINT chk_nome CHECK (nome != '') -- Garantindo que o nome não seja vazio
+    categoria_id INT PRIMARY KEY, 
+    nome VARCHAR(255) NOT NULL, 
+    descricao TEXT, 
+    CONSTRAINT chk_nome CHECK (nome != '') 
 );
 
--- Criando a tabela de medicamentos
 CREATE TABLE medicamentos (
-    medicamento_id INT PRIMARY KEY, -- Chave primária
-    nome VARCHAR(255) NOT NULL, -- Nome do medicamento
-    categoria_id INT, -- Chave estrangeira para a tabela de categorias
-    preco DECIMAL(10, 2) NOT NULL, -- Preço do medicamento
-    estoque INT NOT NULL DEFAULT 0, -- Estoque disponível do medicamento
-    validade DATE, -- Data de validade do medicamento
+    medicamento_id INT PRIMARY KEY, 
+    nome VARCHAR(255) NOT NULL, 
+    categoria_id INT, 
+    preco DECIMAL(10, 2) NOT NULL, 
+    estoque INT NOT NULL DEFAULT 0, 
+    validade DATE, 
     CONSTRAINT fk_categoria FOREIGN KEY (categoria_id) REFERENCES categorias(categoria_id) ON DELETE SET NULL,
-    CONSTRAINT chk_preco CHECK (preco > 0) -- Garantindo que o preço seja positivo
+    CONSTRAINT chk_preco CHECK (preco > 0) 
 );
 
--- Inserindo dados de exemplo nas tabelas
 INSERT INTO categorias (categoria_id, nome, descricao) VALUES
 (1, 'Antibióticos', 'Medicamentos usados para tratar infecções bacterianas'),
 (2, 'Analgésicos', 'Medicamentos usados para aliviar a dor');
